@@ -27,7 +27,7 @@
                     <button class="btn btn-primary btn-lg">
                         <span class="glyphicon glyphicon-list-alt"></span> View Tables</button>
                 </a>
-                <a href="/index">
+                <a href="/home">
                     <button class="btn btn-lg btn-default">
                         <span class="glyphicon glyphicon-home"></span>
                     </button>
@@ -46,19 +46,19 @@
                     </div>
                     <div class="panel-body">
                         <h5>Name</h5>
-                        <input type="text" id="character-search" class="form-control">
+                        <input type="text" id="customerName" class="form-control">
                         <br>
                         <h5>Phone Number</h5>
-                        <input type="text" id="character-search" class="form-control">
+                        <input type="text" id="phoneNumber" class="form-control">
                         <br>
                         <h5>Email</h5>
-                        <input type="text" id="character-search" class="form-control">
+                        <input type="text" id="customerEmail" class="form-control">
                         <br>
                         <h5>Unique ID</h5>
-                        <input type="text" id="character-search" class="form-control">
+                        <input type="text" id="customerID" class="form-control">
                         <br>
                         <div class="text-right">
-                            <button type="submit" class="btn btn-primary btn-md" id="search-btn">
+                            <button type="submit" class="btn btn-primary btn-md" id="add-btn">
                                 <span class="glyphicon glyphicon-search"></span> Submit</button>
 
                         </div>
@@ -70,5 +70,25 @@
     </div>
 
 </body>
+<script type="text/javascript">
+    // Question: What does this code do?
+    $("#add-btn").on("click", function(event) {
+      event.preventDefault();
 
+      var newTable = {
+        customerName: $("#customerName").val().trim(),
+        phoneNumber: $("#phoneNumber").val().trim(),
+        customerEmail: $("#customerEmail").val().trim(),
+        customerID: $("#customerID").val().trim()
+      };
+
+      // Question: What does this code do??
+      $.post("/api/tables", newTable)
+        .then(function(data) {
+          console.log("html" + data);
+          alert("Adding reservation...");
+        });
+
+    });
+  </script>
 </html>

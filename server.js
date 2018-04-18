@@ -34,7 +34,7 @@ var tables = [
 // =============================================================
 
 // Basic route that sends the user first to the AJAX Page
-app.get("/", function(req, res) {
+app.get("/home", function(req, res) {
   res.sendFile(path.join(__dirname, "home.html"));
 });
 
@@ -42,7 +42,7 @@ app.get("/add", function(req, res) {
   res.sendFile(path.join(__dirname, "add.html"));
 });
 
-app.get("/all", function(req, res) {
+app.get("/view", function(req, res) {
   res.sendFile(path.join(__dirname, "view.html"));
 });
 
@@ -74,11 +74,13 @@ app.post("/api/tables", function(req, res) {
 
   // Using a RegEx Pattern to remove spaces from newtable
   // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-  newTable.routeName = newTable.name.replace(/\s+/g, "").toLowerCase();
+  //newTable.routeName = newTable.name.replace(/\s+/g, "").toLowerCase();
 
   console.log(newTable);
+  
 
-  characters.push(newTable);
+  tables.push(newTable);
+  console.log(tables);
 
   res.json(newTable);
 });
