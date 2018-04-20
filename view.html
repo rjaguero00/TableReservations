@@ -42,19 +42,12 @@
                                 <strong>Next</strong>
                             </h4>
                         </div>
-                        <div class='panel-body' id='table selection-01'>
-                            <div class='well' id='tableWell-01'>
+                        <div class='panel-body' id='nextTables'>
+                            <!-- <div class='well' id='name'>
                                 <h2>
                                     <span class="label label-primary">1</span>
-                                    Wilhelmina "Mina" Murray
                                 </h2>
-                            </div>
-                            <div class='well' id='tableWell-01'>
-                                <h2>
-                                    <span class="label label-primary">1</span>
-                                    Allan Quatermain
-                                </h2>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="panel panel-default">
@@ -83,28 +76,31 @@
             </div>
 
             <script type="text/javascript">
-                $("#search-btn").on("click", function () {
-                    var searchedCharacter = $("#character-search").val().trim();
-
-                    // Using a RegEx Pattern to remove spaces from searchedCharacter
-                    // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-                    searchedCharacter = searchedCharacter.replace(/\s+/g, "").toLowerCase();
-
-                    $.get("/api/characters/" + searchedCharacter, function (data) {
+                 function showTables() {  
+                    $.get("/api/tables/", function (data) {
                         console.log(data);
                         if (data) {
-                            $("#stats").show();
-                            $("#name").text(data.name);
-                            $("#role").text(data.role);
-                            $("#age").text(data.age);
-                            $("#force-points").text(data.forcePoints);
-                        }
-                        else {
-                            $("#name").text("The force is not strong with this one. Your character was not found.");
-                            $("#stats").hide();
+                            for (i = 0; i < data.length; i++){
+                                var display = data[i].customerID;
+                                var tableDiv = $('<div class="tableReservation">');
+                                //$("#table selection-01").append(data[i].customerID);
+                                tableDiv.append(
+                                    '<div class="well">' + 
+                                        '<h2>' + 
+                                            '<span>' + display + '</span>' + 
+                                        '</h2>' + 
+                                    '</div>'
+                                );
+
+                                $("#nextTables").append(tableDiv);
+                            }
+                            //("#stats").show();
+                            // $("#name").text(data[2].customerID);
+
                         }
                     });
-                });
+                }
+                showTables();
             </script>
 </body>
 
